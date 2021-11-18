@@ -38,7 +38,7 @@ export default function Application() {
 
   dailyAppointments = getAppointmentsForDay(state, state.day);
 
-  const bookInterview = (id, interview) => {
+  const updateLocalAppointment = (id, interview) => {
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -47,29 +47,35 @@ export default function Application() {
       ...state.appointments,
       [id]: appointment,
     };
-    const updateState = setState({
+    setState({
       ...state,
       appointments,
     });
+  };
+
+  const bookInterview = (id, interview) => {
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then((res) => {
-        if (res.headers.status === 204) updateState();
+        if (res.status === 204) updateLocalAppointment(id, interview);
       });
   };
 
-  const deleteInterview = (id) => {
-    const updateState = setState({
+  const deleteLocalAppointment = (id) => {
+    setState({
       ...state,
       appointments: {
         ...state.appointments,
         [id]: { ...state.appointments[id], interview: null },
       },
     });
+  };
+
+  const deleteInterview = (id) => {
     return axios
       .delete(`http://localhost:8001/api/appointments/${id}`)
       .then((res) => {
-        if (res.headers.status === 200) updateState();
+        if (res.status === 204) deleteLocalAppointment(id);
       });
   };
 
