@@ -9,7 +9,7 @@ import {
   getInterview,
 } from "../helpers/selectors";
 
-export default function Application(props) {
+export default function Application() {
   const [state, setState] = useState({
     day: "Monday",
     days: [],
@@ -38,10 +38,44 @@ export default function Application(props) {
 
   dailyAppointments = getAppointmentsForDay(state, state.day);
 
+  const bookInterview = (id, interview) => {
+    const appointment = {
+      ...state.appointments[id],
+      interview: { ...interview },
+    };
+    const appointments = {
+      ...state.appointments,
+      [id]: appointment,
+    };
+    const updateState = setState({
+      ...state,
+      appointments,
+    });
+    return axios
+      .put(`http://localhost:8001/api/appointments/${id}`, { interview })
+      .then((res) => {
+        if (res.headers.status === 204) updateState();
+      });
+  };
+
+  const deleteInterview = (id) => {
+    const updateState = setState({
+      ...state,
+      appointments: {
+        ...state.appointments,
+        [id]: { ...state.appointments[id], interview: null },
+      },
+    });
+    return axios
+      .delete(`http://localhost:8001/api/appointments/${id}`)
+      .then((res) => {
+        if (res.headers.status === 200) updateState();
+      });
+  };
+
   const schedule = dailyAppointments.map((appointment) => {
     const interview = getInterview(state, appointment.interview);
     const interviewers = getInterviewersForDay(state, state.day);
-
     return (
       <Appointment
         key={appointment.id}
@@ -49,6 +83,8 @@ export default function Application(props) {
         time={appointment.time}
         interview={interview}
         interviewers={interviewers}
+        bookInterview={bookInterview}
+        deleteInterview={deleteInterview}
       />
     );
   });
