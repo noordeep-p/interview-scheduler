@@ -7,6 +7,11 @@ import Confirm from "components/Appointment/Confirm";
 import Status from "components/Appointment/Status";
 import Error from "components/Appointment/Error";
 import Form from "components/Appointment/Form";
+import useVisualMode from "hooks/useVisualMode";
+
+const EMPTY = "EMPTY";
+const SHOW = "SHOW";
+const CREATE = "CREATE";
 
 export default function Appointment(props) {
   const formatTime = (props) => {
@@ -15,17 +20,26 @@ export default function Appointment(props) {
     }
     return `No Appointments`;
   };
+  const { mode, transition, back } = useVisualMode(
+    props.interview ? SHOW : EMPTY
+  );
 
   return (
     <article className="appointment">
       {formatTime(props)}
-      {props.interview ? (
+      {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}
+      {mode === SHOW && (
         <Show
           student={props.interview.student}
           interviewer={props.interview.interviewer}
         />
-      ) : (
-        <Empty />
+      )}
+      {mode === CREATE && (
+        <Form
+          interviewers={props.interviewers}
+          student={null}
+          onCancel={() => back()}
+        />
       )}
     </article>
   );
