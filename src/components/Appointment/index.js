@@ -15,6 +15,8 @@ const SAVING = "SAVING";
 const DELETING = "DELETING";
 const CONFIRM = "CONFIRM";
 const EDIT = "EDIT";
+const ERROR_SAVE = "ERROR_SAVE";
+const ERROR_DELETE = "ERROR_DELETE";
 
 export default function Appointment(props) {
   const formatTime = (props) => {
@@ -34,16 +36,22 @@ export default function Appointment(props) {
       interviewer,
     };
     transition(SAVING);
-    props.bookInterview(props.id, interview).then(() => {
-      transition(SHOW);
-    });
+    props
+      .bookInterview(props.id, interview)
+      .then(() => {
+        transition(SHOW);
+      })
+      .catch(() => transition(ERROR_SAVE, true));
   };
 
   const deleteInterview = () => {
-    transition(DELETING);
-    props.deleteInterview(props.id).then(() => {
-      transition(EMPTY);
-    });
+    transition(DELETING, true);
+    props
+      .deleteInterview(props.id)
+      .then(() => {
+        transition(EMPTY);
+      })
+      .catch(() => transition(ERROR_DELETE, true));
   };
 
   const cancel = () => {
@@ -53,6 +61,12 @@ export default function Appointment(props) {
   return (
     <article className="appointment">
       {formatTime(props)}
+      {mode === ERROR_DELETE && (
+        <Error message="Could not delete Appointment" onCancel={() => back()} />
+      )}
+      {mode === ERROR_SAVE && (
+        <Error message="Could not save Appointment" onCancel={() => back()} />
+      )}
       {mode === SAVING && <Status message="Saving" />}
       {mode === DELETING && <Status message="Deleting" />}
       {mode === CONFIRM && (
