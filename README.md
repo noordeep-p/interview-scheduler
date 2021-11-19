@@ -1,8 +1,8 @@
 # Interview Scheduler
 
-The Interview Scheduler app allows users to book technical interviews between students and mentors. Interview appointments can be booked 12 PM and 5 PM, Monday to Friday, when creating a new appointment, the user can enter any student name and chooses an interviewer from the list provided. The user can add new appointments or edit/ delete existing ones and view the entire schedule of appointments on any day of the week.
+The Interview Scheduler app allows users to book technical interviews between students and mentors. Interview appointments can be booked 12 PM and 5 PM, Monday to Friday, when creating a new appointment the user can enter their name and select an preferred interviewer from the list of available interviewers. The user can add new appointments or edit/ delete existing ones and view the entire schedule of appointments on any day of the week.
 
-The frontend of the scheduler is build with react with axios making requests to fetch data from an API, the goal of the project was to practice using React to create a single page applications and using Axios to make calls to the restful API over HTTP. And the project also allowed for gaining hands on experience with different development environments, including Storybook, Jest, and Webpack Dev Server.
+The frontend of the scheduler is build with react using axios requests to fetch data from an API, the goal of the project was to practice using React to create single page applications and using Axios to make restful API calls over HTTP. And the project also allowed for gaining hands on experience with different development environments, including Storybook, Jest, and Webpack Dev Server.
 
 ## Setup
 
