@@ -26,19 +26,20 @@ export default function useApplicationData() {
     });
   }, []);
 
-  const updateSpots = (userAction) => {
+  const updateSpots = (requestType) => {
     const dayIndex = state.days.findIndex((day) => day.name === state.day);
     const days = state.days;
-    if (userAction === "addAppointment") {
+    if (requestType === "addInterview") {
       days[dayIndex].spots -= 1;
-    } else {
+    }
+    if (requestType === "deleteInterview") {
       days[dayIndex].spots += 1;
     }
     return days;
   };
 
-  const updateLocalInterview = (id, interview) => {
-    const days = updateSpots("addAppointment");
+  const updateLocalInterview = (id, interview, requestType) => {
+    const days = updateSpots(requestType);
     const appointment = {
       ...state.appointments[id],
       interview: { ...interview },
@@ -54,18 +55,18 @@ export default function useApplicationData() {
     });
   };
 
-  const bookInterview = (id, interview) => {
+  const bookInterview = (id, interview, requestType) => {
     return axios
       .put(`http://localhost:8001/api/appointments/${id}`, { interview })
       .then((res) => {
         if (res.status === 204) {
-          updateLocalInterview(id, interview);
+          updateLocalInterview(id, interview, requestType);
         }
       });
   };
 
   const deleteLocalInterview = (id) => {
-    const days = updateSpots();
+    const days = updateSpots("deleteInterview");
     setState({
       ...state,
       appointments: {
