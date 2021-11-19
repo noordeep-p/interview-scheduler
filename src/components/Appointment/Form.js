@@ -17,6 +17,11 @@ export default function Form(props) {
     props.onCancel();
   };
 
+  let requestType;
+  props.student
+    ? (requestType = "updateInterview")
+    : (requestType = "addInterview");
+
   return (
     <main className="appointment__card appointment__card--create">
       <section className="appointment__card-left">
@@ -41,7 +46,10 @@ export default function Form(props) {
           <Button danger onClick={() => cancel()}>
             Cancel
           </Button>
-          <Button confirm onClick={() => props.onSave(student, interviewer)}>
+          <Button
+            confirm
+            onClick={() => props.onSave(student, interviewer, requestType)}
+          >
             Save
           </Button>
         </section>
