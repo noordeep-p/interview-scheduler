@@ -59,7 +59,7 @@ export default function Appointment(props) {
   };
 
   return (
-    <article className="appointment">
+    <article className="appointment" data-testid="appointment">
       {formatTime(props)}
       {mode === ERROR_DELETE && (
         <Error message="Could not delete Appointment" onCancel={() => back()} />
