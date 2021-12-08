@@ -9,7 +9,7 @@ export default function useApplicationData() {
     appointments: {},
   });
 
-  const setDay = (day) => setState({ ...state, day });
+  //const setDay = (day) => setState({ ...state, day });
 
   useEffect(() => {
     Promise.all([
