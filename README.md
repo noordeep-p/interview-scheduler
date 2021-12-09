@@ -18,6 +18,13 @@ Dependencies include:
 - react-hooks-testing-library: ^0.6.0
 - react-scripts: 3.0.0
 
+## Screenshots
+
+!["App Landing Page"](https://raw.githubusercontent.com/noordeep-p/tweeter/master/docs/desktop-top.png)
+!["Add an Appointment"](https://raw.githubusercontent.com/noordeep-p/tweeter/master/docs/desktop-bottom.png)
+!["Edit an Appointment"](https://raw.githubusercontent.com/noordeep-p/tweeter/master/docs/mobile-top.png)
+!["Save Changes"](https://raw.githubusercontent.com/noordeep-p/tweeter/master/docs/mobile-bottom.png)
+
 ## Running Webpack Development Server
 
 ```sh
