@@ -20,10 +20,10 @@ Dependencies include:
 
 ## Screenshots
 
-!["App Landing Page"](https://raw.githubusercontent.com/noordeep-p/tweeter/master/docs/desktop-top.png)
-!["Add an Appointment"](https://raw.githubusercontent.com/noordeep-p/tweeter/master/docs/desktop-bottom.png)
-!["Edit an Appointment"](https://raw.githubusercontent.com/noordeep-p/tweeter/master/docs/mobile-top.png)
-!["Save Changes"](https://raw.githubusercontent.com/noordeep-p/tweeter/master/docs/mobile-bottom.png)
+!["App Landing Page"](https://raw.githubusercontent.com/noordeep-p/interview-scheduler/master/docs/Homepage.png)
+!["Add an Appointment"](https://raw.githubusercontent.com/noordeep-p/interview-scheduler/master/docs/Add-appt.png)
+!["Edit an Appointment"](https://raw.githubusercontent.com/noordeep-p/interview-scheduler/master/docs/Edit-appt.png)
+!["Save Changes"](https://raw.githubusercontent.com/noordeep-p/interview-scheduler/master/docs/Save-appt.png)
 
 ## Running Webpack Development Server
 
